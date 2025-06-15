@@ -50,7 +50,7 @@ export const login = async (request, response) => {
         const username = request.body.username;
         const password = request.body.password;
         if (!username || !password) {
-            return response.status(401).json(
+            return response.status(400).json(
                 {
                     "status": "error",
                     "message": "An error occurred.",
@@ -74,7 +74,7 @@ export const login = async (request, response) => {
                 }
             )
         }
-        return response.status(402).json(
+        return response.status(401).json(
             {
                 "status": "falied",
                 "message": "You've to register first",
