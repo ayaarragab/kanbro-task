@@ -1,22 +1,18 @@
 import User from "../models/user.js";
-import serverErrorsHandler from "../utils.js/helper.js";
 
-async function findUserByUsername(username) {
+async function findUserByUsername(username, password) {
 
-    return await User.findOne({ username });
+    return await User.findOne({ username, password });
 }
 
 
 export async function loginHandler(username, password) {
     try {
-        const isExist = await findUserByUsername(username);
+        const isExist = await findUserByUsername(username, password);
         if (!isExist)
             return false;
-        const fUser = await User.findOne({ username });
-        if (fUser) {
-            return fUser;
-        }
+        return true;
     } catch (error) {
-        serverErrorsHandler(response, error);
+        return false;
     }
 }

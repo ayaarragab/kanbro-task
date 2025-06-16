@@ -1,5 +1,4 @@
 import User from "../models/user.js";
-import serverErrorsHandler from "../utils.js/helper.js";
 
 async function findUserByUsername(username) {
 
@@ -18,6 +17,8 @@ export async function registerHandler(username, password) {
             return newUser;
         }
     } catch (error) {
-        serverErrorsHandler(response, error);
+        console.log(error);
+        
+        return false;
     }
 }
