@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 
 const userSchema = mongoose.Schema({
     username: { 
-        type: String, 
+        type: String,
         unique: true,
         required: true 
     },
@@ -18,6 +18,7 @@ const userSchema = mongoose.Schema({
         },
         message: passwordNotValid => `${passwordNotValid.value} is not a valid password!`
     } },
+    refresh_token: { type: String },
     created_at: { type: Date, default: Date.now }
 })
 

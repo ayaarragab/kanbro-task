@@ -18,7 +18,6 @@ export async function registerHandler(username, password) {
         }
     } catch (error) {
         console.log(error);
-        
         return false;
     }
 }

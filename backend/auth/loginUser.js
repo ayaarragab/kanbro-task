@@ -1,17 +1,30 @@
 import User from "../models/user.js";
+import bcrypt from "bcrypt";
 
-async function findUserByUsername(username, password) {
 
-    return await User.findOne({ username, password });
+async function findUserByUsername(username) {
+
+    return await User.findOne({ username });
 }
 
-
+export async function comparePasswords(dbPassword, inputPassword) {
+    const isValid = await bcrypt.compare(inputPassword, dbPassword);
+    if (isValid) {
+        return true;
+    } else {
+        return 'Password incorrect';
+    }
+}
 export async function loginHandler(username, password) {
     try {
-        const isExist = await findUserByUsername(username, password);
-        if (!isExist)
+        const user = await findUserByUsername(username);
+        if (!user)
             return false;
-        return true;
+        const res = comparePasswords(user.password, password);
+        if (typeof res === 'string') {
+            return res;
+        }
+        return user;
     } catch (error) {
         return false;
     }
