@@ -1,6 +1,5 @@
 import serverErrorHandler from "../utils.js/serverErrorsHandler.js";
-import { registerHandler } from "../auth/registerUser.js";
-import { loginHandler } from "../auth/loginUser.js";
+import { loginHandler, registerHandler } from "../services/userService.js";
 import { configureSuccessResponse,
         configureErrorResponse,
         configureResponseWithCookies } from "../utils.js/responseConfigurations.js";
@@ -43,6 +42,8 @@ export const login = async (request, response) => {
 
 export const regenerateAccessToken = async (request, response) => {
     try {
+        console.log(request.cookies);
+        
         const refreshToken = request.cookies.refresh_token;
         const userData = request.body.data;
         if (!refreshToken) {

@@ -1,4 +1,4 @@
-import Task from '../models/taskModel.js'; // Adjust the path if necessary
+import Task from '../models/task.js';
 
 /**
  * Fetch all tasks with optional filters.
@@ -36,9 +36,9 @@ export const findTaskById = async (id) => {
  * @param {Object} taskData - Data for the new task.
  * @returns {Promise<Object>} - Created task object.
  */
-export const createNewTask = async (taskData) => {
+export const createNewTask = async ({ title, description, status }) => {
     try {
-        const newTask = new Task(taskData);
+        const newTask = await Task.create({ title, description, status });
         const savedTask = await newTask.save();
         return savedTask;
     } catch (error) {

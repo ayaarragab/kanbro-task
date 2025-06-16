@@ -1,13 +1,11 @@
-import { response } from 'express';
-import Task from '../models/taskModel.js'; // Assuming the model is in ../models/taskModel.js
 import { findTasks, findTaskById, createNewTask } from '../services/taskService.js';
 import { configureSuccessResponse, configureErrorResponse } from '../utils.js/responseConfigurations.js';
 import serverErrorsHandler from '../utils.js/serverErrorsHandler.js';
 
-// GetTasks with pagination
-export const GetTasks = async (request, response) => {
+
+export const getTasks = async (request, response) => {
     try {
-        const { page = 1, limit = 10 } = request.query; // Default values for pagination
+        const { page = 1, limit = 10 } = request.query;
         const { tasks, totalTasks } = await findTasks(page, limit);
         const data = {
             tasks,
@@ -21,7 +19,7 @@ export const GetTasks = async (request, response) => {
     }
 };
 
-export const GetOneTask = async (request, response) => {
+export const getOneTask = async (request, response) => {
     try {
         const { taskId } = request.params;
         const task = await findTaskById(taskId);
@@ -34,7 +32,7 @@ export const GetOneTask = async (request, response) => {
     }
 };
 
-export const CreateTask = async (request, res) => {
+export const createTask = async (request, response) => {
     try {
         const taskData = request.body;
         const newTask = await createNewTask(taskData);
@@ -43,3 +41,11 @@ export const CreateTask = async (request, res) => {
         serverErrorsHandler(response, error);
     }
 };
+
+export const updateTask = async (request, response) => {
+
+}
+
+export const deleteTask = async (request, response) => {
+
+}

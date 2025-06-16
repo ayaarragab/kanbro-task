@@ -1,7 +1,7 @@
 import express from 'express';
 import { register, login, regenerateAccessToken } from "../controllers/userController.js";
 import { authenticate } from '../auth/authenticate.js';
-
+import { getTasks, createTask, getOneTask, updateTask, deleteTask } from '../controllers/taskController.js';
 
 const router = express.Router();
 
