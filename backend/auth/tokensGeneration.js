@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 export function generateAccessToken(id) {
     try {
         const accessToken = jwt.sign({ id }, "accessSecret", {
-            expiresIn: "15s",
+            expiresIn: "2h",
         });
         return accessToken;
     } catch (error) {

@@ -18,9 +18,10 @@ const userSchema = mongoose.Schema({
         },
         message: passwordNotValid => `${passwordNotValid.value} is not a valid password!`
     } },
+    tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Task' }],
     refresh_token: { type: String },
     created_at: { type: Date, default: Date.now }
-})
+});
 
 userSchema.pre('save', async function(next) {
     if (!this.isModified('password')) return next();

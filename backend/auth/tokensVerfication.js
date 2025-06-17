@@ -1,10 +1,12 @@
 import User from "../models/user.js";
+import jwt from "jsonwebtoken";
 
 export async function verifyAccessToken(token) {
     try {
-        const user = jwt.verify(token, process.env.JWT_SECRET);
-        if (decoded?.id) {
-            const user = await User.findById(decoded.id);
+        const valid = jwt.verify(token, "accessSecret");
+        
+        if (valid?.id) {
+            const user = await User.findById(valid.id);
             if (user) {
                 return user;
             }
@@ -17,17 +19,17 @@ export async function verifyAccessToken(token) {
 }
 
 export async function verifyRefreshToken(token) {
-    try {
-        const decoded = jwt.verify(token, process.env.RJWT_SECRET_KEY);
-        if (decoded?.id) {
-            const user = await User.findById(decoded.id);
-            if (user) {
-                return user;
-            }
-            return false;
-        }
-    } catch (error) {
-        console.log("Invalid or tampered token:", error.message);
-    }
-    return false;
+    // try {
+    //     const decoded = jwt.verify(token, "accessSecret");
+    //     if (decoded?.id) {
+    //         const user = await User.findById(decoded.id);
+    //         if (user) {
+    //             return user;
+    //         }
+    //         return false;
+    //     }
+    // } catch (error) {
+    //     console.log("Invalid or tampered token:", error.message);
+    // }
+    // return false;
 }

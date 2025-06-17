@@ -15,7 +15,7 @@ export const authenticate = async(request, response, next) => {
 
             try {
                 const user = await verifyAccessToken(token);
-
+                
                 if (user) {
                     request.user = user;
                     next();
